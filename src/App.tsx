@@ -172,7 +172,7 @@ function App() {
   ${jdldB64 ? `<img src="${jdldB64}" style="height: 70px; border-radius: 8px;" />` : ''}
 </div>
 
-<h1 style="font-size: 24px; color: #E91E8C; margin-bottom: 6px; text-align: center;">NeXo - UTM Generator</h1>
+<h1 style="font-size: 24px; color: #E91E8C; margin-bottom: 6px; text-align: center;">NeXe - UTM Generator</h1>
 <p style="color: #666; font-size: 13px; margin-bottom: 20px; text-align: center;">Jardín de las Delicias Festival 2026 — Manual de uso</p>
 
 <h2 style="font-size: 17px; color: #0F3460; margin-top: 24px; margin-bottom: 10px; border-bottom: 2px solid #E91E8C; padding-bottom: 4px;">1. ¿Qué son las UTMs?</h2>
@@ -326,7 +326,7 @@ function App() {
 </ul>
 
 <div style="margin-top: 30px; padding-top: 12px; border-top: 1px solid #e0e0e0; font-size: 11px; color: #999; text-align: center;">
-  NeXo es una herramienta desarrollada por <strong>La Vida es Maravillosa</strong> para uso exclusivo del <strong>Festival Jardín de las Delicias</strong>.
+  NeXe es una herramienta desarrollada por <strong>La Vida es Maravillosa</strong> para uso exclusivo del <strong>Festival Jardín de las Delicias</strong>.
 </div>
 
 </div>`;
@@ -334,7 +334,7 @@ function App() {
     html2pdf()
       .set({
         margin: [10, 10, 10, 10],
-        filename: 'NeXo_Manual_UTMs.pdf',
+        filename: 'NeXe_Manual_UTMs.pdf',
         image: { type: 'jpeg', quality: 0.98 },
         html2canvas: { scale: 2 },
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
@@ -422,7 +422,7 @@ function App() {
           <header className="text-center mb-10 animate-fade-in">
             <h1 className="text-3xl md:text-4xl font-bold text-white mb-3 tracking-tight flex items-center justify-center gap-3">
               <Link2 className="w-8 h-8 md:w-10 md:h-10 text-festival-pink" />
-              NeXo
+              NeXe
             </h1>
             <p className="text-lg md:text-xl text-white/70 font-semibold">
               Generador de UTMs
@@ -468,7 +468,7 @@ function App() {
                 {/* Modal header */}
                 <div className="sticky top-0 bg-white border-b border-gray-100 px-8 py-5 flex items-center justify-between rounded-t-2xl z-10">
                   <div>
-                    <h2 className="text-xl font-bold text-festival-dark">NeXo - UTM Generator</h2>
+                    <h2 className="text-xl font-bold text-festival-dark">NeXe - UTM Generator</h2>
                     <p className="text-sm text-gray-500">Jardín de las Delicias Festival 2026</p>
                   </div>
                   <div className="flex items-center gap-2">
@@ -682,7 +682,7 @@ function App() {
 
                 {/* Modal footer */}
                 <div className="sticky bottom-0 bg-white border-t border-gray-100 px-8 py-4 rounded-b-2xl">
-                  <p className="text-center text-xs text-gray-400">NeXo es una herramienta desarrollada por <strong className="text-gray-500">La Vida es Maravillosa</strong> para uso exclusivo del <strong className="text-gray-500">Festival Jardín de las Delicias</strong>.</p>
+                  <p className="text-center text-xs text-gray-400">NeXe es una herramienta desarrollada por <strong className="text-gray-500">La Vida es Maravillosa</strong> para uso exclusivo del <strong className="text-gray-500">Festival Jardín de las Delicias</strong>.</p>
                 </div>
               </div>
             </div>
@@ -959,7 +959,7 @@ function App() {
           {/* Footer */}
           <footer className="mt-8 text-center space-y-1">
             <p className="text-xs text-white/40">
-              NeXo es una herramienta desarrollada por <strong className="text-white/60">La Vida es Maravillosa</strong> para uso exclusivo del <strong className="text-white/60">Festival Jardín de las Delicias</strong>.
+              NeXe es una herramienta desarrollada por <strong className="text-white/60">La Vida es Maravillosa</strong> para uso exclusivo del <strong className="text-white/60">Festival Jardín de las Delicias</strong>.
             </p>
           </footer>
         </div>
