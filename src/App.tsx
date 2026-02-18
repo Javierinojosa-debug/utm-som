@@ -3,7 +3,7 @@ import html2pdf from 'html2pdf.js';
 import { BookOpen, CheckCircle2, Copy, Download, ExternalLink, Link2, Loader2, Sparkles, X } from 'lucide-react';
 
 const GOOGLE_SCRIPT_URL = import.meta.env.VITE_GOOGLE_SCRIPT_URL || '';
-const usuarios = ['La Vida es Maravillosa', 'Jardín de las Delicias'] as const;
+const usuarios = ['La Vida es Maravillosa', 'SOM Festival'] as const;
 
 type Channel = {
   name: string;
@@ -77,8 +77,7 @@ const channels: Record<string, Channel> = {
   },
 };
 
-const cities = ['Madrid', 'Sevilla', 'Valencia', 'Marbella'];
-const aliases = ['Registros', 'Venta Oficial', 'Primer Avance', 'Segundo Avance', 'Full Line Up'] as const;
+const cities = ['Sergio Dalma', 'Placido Domingo'];
 
 const toBase64 = (url: string): Promise<string> =>
   new Promise((resolve) => {
@@ -97,13 +96,12 @@ const toBase64 = (url: string): Promise<string> =>
 
 function App() {
   const [baseUrl, setBaseUrl] = useState('');
-  const [city, setCity] = useState('Madrid');
+  const [city, setCity] = useState('Sergio Dalma');
   const [channel, setChannel] = useState('SEO orgánico (no pagado)');
   const [selectedSource, setSelectedSource] = useState('google');
   const [customSourceName, setCustomSourceName] = useState('');
   const [utmContent, setUtmContent] = useState('');
-  const [alias, setAlias] = useState<typeof aliases[number]>('Registros');
-  const [usuario, setUsuario] = useState<typeof usuarios[number]>('La Vida es Maravillosa');
+const [usuario, setUsuario] = useState<typeof usuarios[number]>('La Vida es Maravillosa');
   const [copied, setCopied] = useState(false);
   const [showManual, setShowManual] = useState(false);
   const [saving, setSaving] = useState(false);
@@ -119,7 +117,7 @@ function App() {
       .replace(/^_|_$/g, '');
 
   const selectedChannel = channels[channel];
-  const utmCampaign = `jardin_delicias_${normalize(city)}_2026`;
+  const utmCampaign = `som_festival_${normalize(city)}_2026`;
 
   const getSource = () => {
     if (selectedChannel.customSource && customSourceName) {
@@ -172,8 +170,8 @@ function App() {
   ${jdldB64 ? `<img src="${jdldB64}" style="height: 70px; border-radius: 8px;" />` : ''}
 </div>
 
-<h1 style="font-size: 24px; color: #E91E8C; margin-bottom: 6px; text-align: center;">NeXe - UTM Generator</h1>
-<p style="color: #666; font-size: 13px; margin-bottom: 20px; text-align: center;">Jardín de las Delicias Festival 2026 — Manual de uso</p>
+<h1 style="font-size: 24px; color: #E91E8C; margin-bottom: 6px; text-align: center;">NeXo - UTM Generator</h1>
+<p style="color: #666; font-size: 13px; margin-bottom: 20px; text-align: center;">SOM Festival 2026 — Manual de uso</p>
 
 <h2 style="font-size: 17px; color: #0F3460; margin-top: 24px; margin-bottom: 10px; border-bottom: 2px solid #E91E8C; padding-bottom: 4px;">1. ¿Qué son las UTMs?</h2>
 <p style="font-size: 13px; margin-bottom: 10px;">Las UTMs (Urchin Tracking Module) son parámetros que se añaden a una URL para rastrear el origen del tráfico en herramientas de analítica como Google Analytics. Permiten saber exactamente de qué campaña, canal y contenido proviene cada visita.</p>
@@ -183,7 +181,7 @@ function App() {
   <tr><th style="background: #0F3460; color: white; text-align: left; padding: 8px 10px;">Parámetro</th><th style="background: #0F3460; color: white; text-align: left; padding: 8px 10px;">Descripción</th><th style="background: #0F3460; color: white; text-align: left; padding: 8px 10px;">Ejemplo</th></tr>
   <tr><td style="padding: 8px 10px; border-bottom: 1px solid #e0e0e0;"><code style="color: #E91E8C;">utm_source</code></td><td style="padding: 8px 10px; border-bottom: 1px solid #e0e0e0;">Origen del tráfico</td><td style="padding: 8px 10px; border-bottom: 1px solid #e0e0e0;">google, tiktok, influencer_ana</td></tr>
   <tr><td style="padding: 8px 10px; border-bottom: 1px solid #e0e0e0; background: #f8f8fc;"><code style="color: #E91E8C;">utm_medium</code></td><td style="padding: 8px 10px; border-bottom: 1px solid #e0e0e0; background: #f8f8fc;">Tipo de canal o medio</td><td style="padding: 8px 10px; border-bottom: 1px solid #e0e0e0; background: #f8f8fc;">cpc, paid_social, email</td></tr>
-  <tr><td style="padding: 8px 10px; border-bottom: 1px solid #e0e0e0;"><code style="color: #E91E8C;">utm_campaign</code></td><td style="padding: 8px 10px; border-bottom: 1px solid #e0e0e0;">Nombre de la campaña (auto)</td><td style="padding: 8px 10px; border-bottom: 1px solid #e0e0e0;">jardin_delicias_madrid_2026</td></tr>
+  <tr><td style="padding: 8px 10px; border-bottom: 1px solid #e0e0e0;"><code style="color: #E91E8C;">utm_campaign</code></td><td style="padding: 8px 10px; border-bottom: 1px solid #e0e0e0;">Nombre de la campaña (auto)</td><td style="padding: 8px 10px; border-bottom: 1px solid #e0e0e0;">som_festival_sergio_dalma_2026</td></tr>
   <tr><td style="padding: 8px 10px; border-bottom: 1px solid #e0e0e0; background: #f8f8fc;"><code style="color: #E91E8C;">utm_content</code></td><td style="padding: 8px 10px; border-bottom: 1px solid #e0e0e0; background: #f8f8fc;">Promoción (opcional)</td><td style="padding: 8px 10px; border-bottom: 1px solid #e0e0e0; background: #f8f8fc;">black_friday, lanzamiento</td></tr>
 </table>
 
@@ -205,25 +203,14 @@ function App() {
   <tr><td style="padding: 8px 10px; border-bottom: 1px solid #e0e0e0;">Referral (externo)</td><td style="padding: 8px 10px; border-bottom: 1px solid #e0e0e0;"><code style="color: #E91E8C;">blogexterno / sitioexterno</code></td><td style="padding: 8px 10px; border-bottom: 1px solid #e0e0e0;">referral</td></tr>
 </table>
 
-<h2 style="font-size: 17px; color: #0F3460; margin-top: 24px; margin-bottom: 10px; border-bottom: 2px solid #E91E8C; padding-bottom: 4px;">4. Ciudades</h2>
-<p style="font-size: 13px; margin-bottom: 10px;">Las campañas están segmentadas por ciudad: <strong>Madrid</strong> · <strong>Sevilla</strong> · <strong>Valencia</strong> · <strong>Marbella</strong></p>
-<p style="font-size: 13px; margin-bottom: 10px;">Formato automático: <code style="color: #E91E8C;">jardin_delicias_{ciudad}_2026</code></p>
-
-<h2 style="font-size: 17px; color: #0F3460; margin-top: 24px; margin-bottom: 10px; border-bottom: 2px solid #E91E8C; padding-bottom: 4px;">5. Campo Alias</h2>
-<p style="font-size: 13px; margin-bottom: 10px;">El <strong>Alias</strong> identifica la fase o tipo de comunicación del enlace generado. Se registra junto al resto de datos en Google Sheets para facilitar el seguimiento.</p>
-<table style="width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 12px;">
-  <tr><th style="background: #0F3460; color: white; text-align: left; padding: 8px 10px;">Alias</th><th style="background: #0F3460; color: white; text-align: left; padding: 8px 10px;">Cuándo usarlo</th></tr>
-  <tr><td style="padding: 8px 10px; border-bottom: 1px solid #e0e0e0; font-weight: bold;">Registros</td><td style="padding: 8px 10px; border-bottom: 1px solid #e0e0e0;">Fase de recogida de registros / pre-inscripción</td></tr>
-  <tr><td style="padding: 8px 10px; border-bottom: 1px solid #e0e0e0; background: #f8f8fc; font-weight: bold;">Venta Oficial</td><td style="padding: 8px 10px; border-bottom: 1px solid #e0e0e0; background: #f8f8fc;">Apertura oficial de venta de entradas</td></tr>
-  <tr><td style="padding: 8px 10px; border-bottom: 1px solid #e0e0e0; font-weight: bold;">Primer Avance</td><td style="padding: 8px 10px; border-bottom: 1px solid #e0e0e0;">Primera comunicación de artistas o contenido</td></tr>
-  <tr><td style="padding: 8px 10px; border-bottom: 1px solid #e0e0e0; background: #f8f8fc; font-weight: bold;">Segundo Avance</td><td style="padding: 8px 10px; border-bottom: 1px solid #e0e0e0; background: #f8f8fc;">Segunda comunicación de artistas o contenido</td></tr>
-  <tr><td style="padding: 8px 10px; font-weight: bold;">Full Line Up</td><td style="padding: 8px 10px;">Revelación completa del cartel</td></tr>
-</table>
+<h2 style="font-size: 17px; color: #0F3460; margin-top: 24px; margin-bottom: 10px; border-bottom: 2px solid #E91E8C; padding-bottom: 4px;">4. Eventos</h2>
+<p style="font-size: 13px; margin-bottom: 10px;">Las campañas están segmentadas por evento: <strong>Sergio Dalma</strong> · <strong>Placido Domingo</strong></p>
+<p style="font-size: 13px; margin-bottom: 10px;">Formato automático: <code style="color: #E91E8C;">som_festival_{evento}_2026</code></p>
 
 <h2 style="font-size: 17px; color: #0F3460; margin-top: 24px; margin-bottom: 10px; border-bottom: 2px solid #E91E8C; padding-bottom: 4px;">6. Registros históricos</h2>
 <p style="font-size: 13px; margin-bottom: 10px;">Cada URL copiada queda registrada automáticamente en Google Sheets con todos sus parámetros. Puedes consultar el historial completo desde el botón <strong>"Ver registros históricos"</strong> en la pantalla principal.</p>
 <div style="background: #FFF8E1; border-left: 4px solid #F5C518; padding: 10px 12px; margin: 10px 0; font-size: 12px; border-radius: 0 6px 6px 0;">
-  Los campos registrados son: <strong>Timestamp · Usuario · Alias · URL Base · Ciudad · Canal · utm_source · utm_medium · utm_campaign · utm_content · URL Final</strong>
+  Los campos registrados son: <strong>Timestamp · Usuario · URL Base · Evento · Canal · utm_source · utm_medium · utm_campaign · utm_content · URL Final</strong>
 </div>
 
 <h2 style="font-size: 17px; color: #0F3460; margin-top: 24px; margin-bottom: 10px; border-bottom: 2px solid #E91E8C; padding-bottom: 4px;">7. Guía visual paso a paso</h2>
@@ -233,23 +220,14 @@ function App() {
     <span style="display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 50%; background: #E91E8C; color: white; font-size: 12px; font-weight: bold; flex-shrink: 0;">1</span>
     <div style="font-size: 13px;"><strong>Introduce la URL base</strong> <span style="color: #888;">— Debe terminar en .com o .es.</span></div>
   </div>
-  <div style="margin-left: 34px; background: white; border: 1px solid #ccc; border-radius: 6px; padding: 6px 10px; font-size: 11px; color: #999; font-family: monospace;">https://entradas.jardindelasdelicias.com</div>
+  <div style="margin-left: 34px; background: white; border: 1px solid #ccc; border-radius: 6px; padding: 6px 10px; font-size: 11px; color: #999; font-family: monospace;">https://somfestival.com</div>
 </div>
 <div style="text-align: center; color: #ccc; font-size: 16px; line-height: 1;">↓</div>
 
 <div style="background: #f8f8fc; border: 1px solid #e0e0e0; border-radius: 10px; padding: 14px; margin-bottom: 6px;">
   <div style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 8px;">
     <span style="display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 50%; background: #E91E8C; color: white; font-size: 12px; font-weight: bold; flex-shrink: 0;">2</span>
-    <div style="font-size: 13px;"><strong>Selecciona el Alias</strong> <span style="color: #888;">— La fase de la campaña.</span></div>
-  </div>
-  <div style="margin-left: 34px; background: white; border: 1px solid #ccc; border-radius: 6px; padding: 6px 10px; font-size: 11px; color: #555;">Venta Oficial ▼</div>
-</div>
-<div style="text-align: center; color: #ccc; font-size: 16px; line-height: 1;">↓</div>
-
-<div style="background: #f8f8fc; border: 1px solid #e0e0e0; border-radius: 10px; padding: 14px; margin-bottom: 6px;">
-  <div style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 8px;">
-    <span style="display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 50%; background: #E91E8C; color: white; font-size: 12px; font-weight: bold; flex-shrink: 0;">3</span>
-    <div style="font-size: 13px;"><strong>Selecciona usuario y ciudad</strong> <span style="color: #888;">— Quién genera y la ciudad de campaña.</span></div>
+    <div style="font-size: 13px;"><strong>Selecciona usuario y evento</strong> <span style="color: #888;">— Quién genera y el evento de campaña.</span></div>
   </div>
   <div style="margin-left: 34px; display: flex; gap: 8px;">
     <div style="flex: 1; background: white; border: 1px solid #ccc; border-radius: 6px; padding: 6px 10px; font-size: 11px; color: #555;">La Vida es Maravillosa ▼</div>
@@ -289,7 +267,7 @@ function App() {
     <div style="background: white; border: 1px solid #e0e0e0; border-radius: 6px; padding: 8px 10px; font-size: 10px; font-family: monospace; margin-bottom: 6px;">
       <div style="display: flex; gap: 6px;"><span style="color: #999; width: 75px;">utm_source</span><span style="color: #009AA8;">instagram</span></div>
       <div style="display: flex; gap: 6px;"><span style="color: #999; width: 75px;">utm_medium</span><span style="color: #009AA8;">social</span></div>
-      <div style="display: flex; gap: 6px;"><span style="color: #999; width: 75px;">utm_campaign</span><span style="color: #009AA8;">jardin_delicias_madrid_2026</span></div>
+      <div style="display: flex; gap: 6px;"><span style="color: #999; width: 75px;">utm_campaign</span><span style="color: #009AA8;">som_festival_sergio_dalma_2026</span></div>
       <div style="display: flex; gap: 6px;"><span style="color: #999; width: 75px;">utm_content</span><span style="color: #009AA8;">black_friday</span></div>
     </div>
     <div style="background: linear-gradient(to right, #E91E8C, #C4177A); color: white; text-align: center; font-size: 12px; font-weight: bold; padding: 8px; border-radius: 6px;">Copiar URL</div>
@@ -299,18 +277,18 @@ function App() {
 <h2 style="font-size: 17px; color: #0F3460; margin-top: 24px; margin-bottom: 10px; border-bottom: 2px solid #E91E8C; padding-bottom: 4px;">8. Ejemplos prácticos</h2>
 
 <div style="background: #f8f8fc; border-left: 4px solid #00B4C5; padding: 12px; margin: 12px 0; font-size: 12px;">
-  <strong>Paid Social en Madrid</strong><br/>
-  <code style="word-break: break-all; color: #E91E8C;">https://entradas.jardin.com?utm_source={{site_source_name}}&amp;utm_medium=paid_social&amp;utm_campaign=jardin_delicias_madrid_2026</code>
+  <strong>Paid Social — Sergio Dalma</strong><br/>
+  <code style="word-break: break-all; color: #E91E8C;">https://somfestival.com?utm_source={{site_source_name}}&amp;utm_medium=paid_social&amp;utm_campaign=som_festival_sergio_dalma_2026</code>
 </div>
 
 <div style="background: #f8f8fc; border-left: 4px solid #00B4C5; padding: 12px; margin: 12px 0; font-size: 12px;">
-  <strong>Redes sociales orgánicas (Instagram) en Valencia</strong><br/>
-  <code style="word-break: break-all; color: #E91E8C;">https://entradas.jardin.com?utm_source=instagram&amp;utm_medium=social&amp;utm_campaign=jardin_delicias_valencia_2026</code>
+  <strong>Redes sociales orgánicas (Instagram) — Placido Domingo</strong><br/>
+  <code style="word-break: break-all; color: #E91E8C;">https://somfestival.com?utm_source=instagram&amp;utm_medium=social&amp;utm_campaign=som_festival_placido_domingo_2026</code>
 </div>
 
 <div style="background: #f8f8fc; border-left: 4px solid #00B4C5; padding: 12px; margin: 12px 0; font-size: 12px;">
-  <strong>Influencer "Ana López" en Sevilla + Black Friday</strong><br/>
-  <code style="word-break: break-all; color: #E91E8C;">https://entradas.jardin.com?utm_source=influencer_ana_lopez&amp;utm_medium=influencer&amp;utm_campaign=jardin_delicias_sevilla_2026&amp;utm_content=black_friday</code>
+  <strong>Influencer "Ana López" — Sergio Dalma + Black Friday</strong><br/>
+  <code style="word-break: break-all; color: #E91E8C;">https://somfestival.com?utm_source=influencer_ana_lopez&amp;utm_medium=influencer&amp;utm_campaign=som_festival_sergio_dalma_2026&amp;utm_content=black_friday</code>
 </div>
 
 <h2 style="font-size: 17px; color: #0F3460; margin-top: 24px; margin-bottom: 10px; border-bottom: 2px solid #E91E8C; padding-bottom: 4px;">9. Buenas prácticas</h2>
@@ -326,7 +304,7 @@ function App() {
 </ul>
 
 <div style="margin-top: 30px; padding-top: 12px; border-top: 1px solid #e0e0e0; font-size: 11px; color: #999; text-align: center;">
-  NeXe es una herramienta desarrollada por <strong>La Vida es Maravillosa</strong> para uso exclusivo del <strong>Festival Jardín de las Delicias</strong>.
+  NeXo es una herramienta desarrollada por <strong>La Vida es Maravillosa</strong> para uso exclusivo del <strong>SOM Festival</strong>.
 </div>
 
 </div>`;
@@ -334,7 +312,7 @@ function App() {
     html2pdf()
       .set({
         margin: [10, 10, 10, 10],
-        filename: 'NeXe_Manual_UTMs.pdf',
+        filename: 'NeXo_Manual_UTMs.pdf',
         image: { type: 'jpeg', quality: 0.98 },
         html2canvas: { scale: 2 },
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
@@ -357,9 +335,8 @@ function App() {
         body: JSON.stringify({
           timestamp: new Date().toISOString(),
           usuario,
-          alias,
           url_base: baseUrl,
-          ciudad: city,
+          evento: city,
           canal: channel,
           utm_source: getSource(),
           utm_medium: selectedChannel.medium,
@@ -406,12 +383,12 @@ function App() {
           <img
             src="/images/lvm.png"
             alt="Life is Wonderful"
-            className="w-40 md:w-56"
+            className="w-40 md:w-56 h-20 md:h-28 object-contain"
           />
           <img
-            src="/images/z JDLD 1.91_1_Logo JDLD25.jpg"
-            alt="Jardín de las Delicias Festival"
-            className="w-40 md:w-56 rounded-xl shadow-lg shadow-festival-pink/20 ring-1 ring-white/10"
+            src="/images/logosom.png"
+            alt="SOM"
+            className="w-40 md:w-56 h-20 md:h-28 object-contain"
           />
         </div>
       </div>
@@ -422,13 +399,13 @@ function App() {
           <header className="text-center mb-10 animate-fade-in">
             <h1 className="text-3xl md:text-4xl font-bold text-white mb-3 tracking-tight flex items-center justify-center gap-3">
               <Link2 className="w-8 h-8 md:w-10 md:h-10 text-festival-pink" />
-              NeXe
+              NeXo
             </h1>
             <p className="text-lg md:text-xl text-white/70 font-semibold">
               Generador de UTMs
             </p>
             <p className="text-sm md:text-base text-white/40 max-w-xl mx-auto">
-              Crea UTMs personalizadas para las campañas del festival
+              Crea UTMs personalizadas para las campañas de SOM Festival
             </p>
             <div className="flex items-center justify-center gap-2 mt-4">
               <div className="h-px w-12 bg-gradient-to-r from-transparent to-festival-pink/50" />
@@ -447,7 +424,7 @@ function App() {
               Ver manual de uso
             </button>
             <a
-              href="https://docs.google.com/spreadsheets/d/1jULq22hV2beqPoOy2flUx-pItJJsIWE_9GC64264B40/edit?gid=0#gid=0"
+              href="https://docs.google.com/spreadsheets/d/1YDsU9s521cl93xjJcXTKavlor3FnyLDiuZf728856JA/edit?gid=0#gid=0"
               target="_blank"
               rel="noopener noreferrer"
               className="mt-3 inline-flex items-center gap-2 px-6 py-2.5 bg-festival-gold/20 hover:bg-festival-gold/30 border border-festival-gold/40 rounded-full text-sm font-semibold text-festival-gold hover:text-white transition-all duration-200"
@@ -468,8 +445,8 @@ function App() {
                 {/* Modal header */}
                 <div className="sticky top-0 bg-white border-b border-gray-100 px-8 py-5 flex items-center justify-between rounded-t-2xl z-10">
                   <div>
-                    <h2 className="text-xl font-bold text-festival-dark">NeXe - UTM Generator</h2>
-                    <p className="text-sm text-gray-500">Jardín de las Delicias Festival 2026</p>
+                    <h2 className="text-xl font-bold text-festival-dark">NeXo - UTM Generator</h2>
+                    <p className="text-sm text-gray-500">SOM Festival 2026</p>
                   </div>
                   <div className="flex items-center gap-2">
                     <button
@@ -503,7 +480,7 @@ function App() {
                         <tbody className="text-gray-600">
                           <tr className="border-t border-gray-100"><td className="px-4 py-2.5"><code className="text-festival-pink bg-pink-50 px-1.5 py-0.5 rounded text-xs">utm_source</code></td><td className="px-4 py-2.5">Origen del tráfico</td><td className="px-4 py-2.5">google, tiktok, influencer_ana</td></tr>
                           <tr className="border-t border-gray-100 bg-gray-50"><td className="px-4 py-2.5"><code className="text-festival-pink bg-pink-50 px-1.5 py-0.5 rounded text-xs">utm_medium</code></td><td className="px-4 py-2.5">Tipo de canal</td><td className="px-4 py-2.5">cpc, paid_social, email</td></tr>
-                          <tr className="border-t border-gray-100"><td className="px-4 py-2.5"><code className="text-festival-pink bg-pink-50 px-1.5 py-0.5 rounded text-xs">utm_campaign</code></td><td className="px-4 py-2.5">Nombre de campaña (auto)</td><td className="px-4 py-2.5">jardin_delicias_madrid_2026</td></tr>
+                          <tr className="border-t border-gray-100"><td className="px-4 py-2.5"><code className="text-festival-pink bg-pink-50 px-1.5 py-0.5 rounded text-xs">utm_campaign</code></td><td className="px-4 py-2.5">Nombre de campaña (auto)</td><td className="px-4 py-2.5">som_festival_sergio_dalma_2026</td></tr>
                           <tr className="border-t border-gray-100 bg-gray-50"><td className="px-4 py-2.5"><code className="text-festival-pink bg-pink-50 px-1.5 py-0.5 rounded text-xs">utm_content</code></td><td className="px-4 py-2.5">Promoción (opcional)</td><td className="px-4 py-2.5">black_friday, lanzamiento</td></tr>
                         </tbody>
                       </table>
@@ -535,38 +512,21 @@ function App() {
                   </section>
 
                   <section>
-                    <h3 className="text-lg font-bold text-festival-pink mb-2">4. Ciudades</h3>
-                    <p className="text-gray-600 mb-2">Las campañas están segmentadas por ciudad:</p>
+                    <h3 className="text-lg font-bold text-festival-pink mb-2">4. Eventos</h3>
+                    <p className="text-gray-600 mb-2">Las campañas están segmentadas por evento:</p>
                     <div className="flex gap-2 flex-wrap">
                       {cities.map((c) => (
                         <span key={c} className="px-3 py-1 bg-festival-dark text-white rounded-full text-xs font-semibold">{c}</span>
                       ))}
                     </div>
-                    <p className="text-gray-500 text-xs mt-2">Formato automático: <code className="text-festival-pink bg-pink-50 px-1.5 py-0.5 rounded text-xs">jardin_delicias_{'{ciudad}'}_2026</code></p>
-                  </section>
-
-                  <section>
-                    <h3 className="text-lg font-bold text-festival-pink mb-3">5. Campo Alias</h3>
-                    <p className="text-gray-600 mb-3">El <strong>Alias</strong> identifica la fase o tipo de comunicación del enlace generado. Se registra junto al resto de datos en Google Sheets para facilitar el seguimiento.</p>
-                    <div className="overflow-x-auto rounded-xl border border-gray-200">
-                      <table className="w-full text-left text-sm">
-                        <thead><tr className="bg-festival-dark text-white"><th className="px-4 py-2.5">Alias</th><th className="px-4 py-2.5">Cuándo usarlo</th></tr></thead>
-                        <tbody className="text-gray-600">
-                          <tr className="border-t border-gray-100"><td className="px-4 py-2.5 font-semibold">Registros</td><td className="px-4 py-2.5">Fase de recogida de registros / pre-inscripción</td></tr>
-                          <tr className="border-t border-gray-100 bg-gray-50"><td className="px-4 py-2.5 font-semibold">Venta Oficial</td><td className="px-4 py-2.5">Apertura oficial de venta de entradas</td></tr>
-                          <tr className="border-t border-gray-100"><td className="px-4 py-2.5 font-semibold">Primer Avance</td><td className="px-4 py-2.5">Primera comunicación de artistas o contenido</td></tr>
-                          <tr className="border-t border-gray-100 bg-gray-50"><td className="px-4 py-2.5 font-semibold">Segundo Avance</td><td className="px-4 py-2.5">Segunda comunicación de artistas o contenido</td></tr>
-                          <tr className="border-t border-gray-100"><td className="px-4 py-2.5 font-semibold">Full Line Up</td><td className="px-4 py-2.5">Revelación completa del cartel</td></tr>
-                        </tbody>
-                      </table>
-                    </div>
+                    <p className="text-gray-500 text-xs mt-2">Formato automático: <code className="text-festival-pink bg-pink-50 px-1.5 py-0.5 rounded text-xs">som_festival_{'{evento}'}_2026</code></p>
                   </section>
 
                   <section>
                     <h3 className="text-lg font-bold text-festival-pink mb-3">6. Registros históricos</h3>
                     <p className="text-gray-600 mb-2">Cada URL copiada queda registrada automáticamente en Google Sheets con todos sus parámetros. Puedes consultar el historial completo desde el botón <strong>"Ver registros históricos"</strong> en la pantalla principal.</p>
                     <div className="bg-yellow-50 border-l-4 border-festival-gold p-3 rounded-r-xl text-xs text-gray-600">
-                      Los campos registrados son: Timestamp · Usuario · Alias · URL Base · Ciudad · Canal · utm_source · utm_medium · utm_campaign · utm_content · URL Final
+                      Los campos registrados son: Timestamp · Usuario · URL Base · Evento · Canal · utm_source · utm_medium · utm_campaign · utm_content · URL Final
                     </div>
                   </section>
 
@@ -579,7 +539,7 @@ function App() {
                           <span className="flex-shrink-0 w-7 h-7 rounded-full bg-festival-pink text-white flex items-center justify-center text-xs font-bold">1</span>
                           <div><strong className="text-festival-dark">Introduce la URL base</strong> <span className="text-gray-500">— Debe terminar en .com o .es.</span></div>
                         </div>
-                        <div className="ml-10 bg-white rounded-lg border border-gray-300 px-3 py-2 text-xs text-gray-400 font-mono">https://entradas.jardindelasdelicias.com</div>
+                        <div className="ml-10 bg-white rounded-lg border border-gray-300 px-3 py-2 text-xs text-gray-400 font-mono">https://somfestival.com</div>
                       </div>
                       <div className="flex justify-center text-gray-300 text-lg">↓</div>
 
@@ -587,17 +547,7 @@ function App() {
                       <div className="bg-gray-50 rounded-xl p-4 border border-gray-200">
                         <div className="flex items-start gap-3 mb-3">
                           <span className="flex-shrink-0 w-7 h-7 rounded-full bg-festival-pink text-white flex items-center justify-center text-xs font-bold">2</span>
-                          <div><strong className="text-festival-dark">Selecciona el Alias</strong> <span className="text-gray-500">— La fase de la campaña.</span></div>
-                        </div>
-                        <div className="ml-10 bg-white rounded-lg border border-gray-300 px-3 py-2 text-xs text-gray-600 flex items-center justify-between">Venta Oficial <span className="text-gray-400">▼</span></div>
-                      </div>
-                      <div className="flex justify-center text-gray-300 text-lg">↓</div>
-
-                      {/* Step 3 */}
-                      <div className="bg-gray-50 rounded-xl p-4 border border-gray-200">
-                        <div className="flex items-start gap-3 mb-3">
-                          <span className="flex-shrink-0 w-7 h-7 rounded-full bg-festival-pink text-white flex items-center justify-center text-xs font-bold">3</span>
-                          <div><strong className="text-festival-dark">Selecciona usuario y ciudad</strong> <span className="text-gray-500">— Quién genera y la ciudad de campaña.</span></div>
+                          <div><strong className="text-festival-dark">Selecciona usuario y evento</strong> <span className="text-gray-500">— Quién genera y el evento de campaña.</span></div>
                         </div>
                         <div className="ml-10 grid grid-cols-2 gap-2">
                           <div className="bg-white rounded-lg border border-gray-300 px-3 py-2 text-xs text-gray-600 flex items-center justify-between">La Vida es Maravillosa <span className="text-gray-400">▼</span></div>
@@ -640,7 +590,7 @@ function App() {
                           <div className="bg-white rounded-lg border border-gray-200 px-3 py-2 text-[10px] text-gray-500 font-mono">
                             <div className="flex gap-2"><span className="text-gray-400 w-20">utm_source</span><span className="text-festival-teal-dark">instagram</span></div>
                             <div className="flex gap-2"><span className="text-gray-400 w-20">utm_medium</span><span className="text-festival-teal-dark">social</span></div>
-                            <div className="flex gap-2"><span className="text-gray-400 w-20">utm_campaign</span><span className="text-festival-teal-dark">jardin_delicias_madrid_2026</span></div>
+                            <div className="flex gap-2"><span className="text-gray-400 w-20">utm_campaign</span><span className="text-festival-teal-dark">som_festival_sergio_dalma_2026</span></div>
                             <div className="flex gap-2"><span className="text-gray-400 w-20">utm_content</span><span className="text-festival-teal-dark">black_friday</span></div>
                           </div>
                           <div className="bg-gradient-to-r from-pink-500 to-pink-600 text-white text-center text-xs font-semibold py-2 rounded-lg">Copiar URL</div>
@@ -652,16 +602,16 @@ function App() {
                   <section>
                     <h3 className="text-lg font-bold text-festival-pink mb-3">6. Ejemplo práctico</h3>
                     <div className="bg-gray-50 border-l-4 border-festival-teal p-4 rounded-r-xl mb-3">
-                      <p className="font-semibold text-festival-dark mb-1">Paid Social en Madrid</p>
-                      <code className="block text-xs text-gray-600 bg-white p-3 rounded-lg break-all mt-2">https://entradas.jardin.com?utm_source={'{{site_source_name}}'}&utm_medium=paid_social&utm_campaign=jardin_delicias_madrid_2026</code>
+                      <p className="font-semibold text-festival-dark mb-1">Paid Social — Sergio Dalma</p>
+                      <code className="block text-xs text-gray-600 bg-white p-3 rounded-lg break-all mt-2">https://somfestival.com?utm_source={'{{site_source_name}}'}&utm_medium=paid_social&utm_campaign=som_festival_sergio_dalma_2026</code>
                     </div>
                     <div className="bg-gray-50 border-l-4 border-festival-teal p-4 rounded-r-xl mb-3">
-                      <p className="font-semibold text-festival-dark mb-1">Redes sociales orgánicas (Instagram) en Valencia</p>
-                      <code className="block text-xs text-gray-600 bg-white p-3 rounded-lg break-all mt-2">https://entradas.jardin.com?utm_source=instagram&utm_medium=social&utm_campaign=jardin_delicias_valencia_2026</code>
+                      <p className="font-semibold text-festival-dark mb-1">Redes sociales orgánicas (Instagram) — Placido Domingo</p>
+                      <code className="block text-xs text-gray-600 bg-white p-3 rounded-lg break-all mt-2">https://somfestival.com?utm_source=instagram&utm_medium=social&utm_campaign=som_festival_placido_domingo_2026</code>
                     </div>
                     <div className="bg-gray-50 border-l-4 border-festival-teal p-4 rounded-r-xl">
-                      <p className="font-semibold text-festival-dark mb-1">Influencer "Ana López" en Sevilla + Black Friday</p>
-                      <code className="block text-xs text-gray-600 bg-white p-3 rounded-lg break-all mt-2">https://entradas.jardin.com?utm_source=influencer_ana_lopez&utm_medium=influencer&utm_campaign=jardin_delicias_sevilla_2026&utm_content=black_friday</code>
+                      <p className="font-semibold text-festival-dark mb-1">Influencer "Ana López" — Sergio Dalma + Black Friday</p>
+                      <code className="block text-xs text-gray-600 bg-white p-3 rounded-lg break-all mt-2">https://somfestival.com?utm_source=influencer_ana_lopez&utm_medium=influencer&utm_campaign=som_festival_sergio_dalma_2026&utm_content=black_friday</code>
                     </div>
                   </section>
 
@@ -682,7 +632,7 @@ function App() {
 
                 {/* Modal footer */}
                 <div className="sticky bottom-0 bg-white border-t border-gray-100 px-8 py-4 rounded-b-2xl">
-                  <p className="text-center text-xs text-gray-400">NeXe es una herramienta desarrollada por <strong className="text-gray-500">La Vida es Maravillosa</strong> para uso exclusivo del <strong className="text-gray-500">Festival Jardín de las Delicias</strong>.</p>
+                  <p className="text-center text-xs text-gray-400">NeXo es una herramienta desarrollada por <strong className="text-gray-500">La Vida es Maravillosa</strong> para uso exclusivo del <strong className="text-gray-500">SOM Festival</strong>.</p>
                 </div>
               </div>
             </div>
@@ -709,25 +659,7 @@ function App() {
                 )}
               </div>
 
-              {/* Alias */}
-              <div className="space-y-2">
-                <label htmlFor="alias" className="block text-sm font-semibold text-white/80">
-                  Alias
-                </label>
-                <select
-                  id="alias"
-                  value={alias}
-                  onChange={(e) => setAlias(e.target.value as typeof aliases[number])}
-                  className="w-full px-4 py-3 bg-white/[0.07] border-2 border-white/10 rounded-xl focus:outline-none focus:border-festival-pink focus:ring-4 focus:ring-festival-pink/20 transition-all duration-200 text-white cursor-pointer appearance-none"
-                  style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ffffff80' d='M6 8L1 3h10z'/%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 16px center' }}
-                >
-                  {aliases.map((a) => (
-                    <option key={a} value={a} className="bg-festival-dark text-white">{a}</option>
-                  ))}
-                </select>
-              </div>
-
-              {/* Usuario & Ciudad */}
+{/* Usuario & Ciudad */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label htmlFor="usuario" className="block text-sm font-semibold text-white/80">
@@ -749,7 +681,7 @@ function App() {
                 </div>
                 <div className="space-y-2">
                   <label htmlFor="city" className="block text-sm font-semibold text-white/80">
-                    Ciudad
+                    Evento
                   </label>
                   <select
                     id="city"
@@ -959,7 +891,7 @@ function App() {
           {/* Footer */}
           <footer className="mt-8 text-center space-y-1">
             <p className="text-xs text-white/40">
-              NeXe es una herramienta desarrollada por <strong className="text-white/60">La Vida es Maravillosa</strong> para uso exclusivo del <strong className="text-white/60">Festival Jardín de las Delicias</strong>.
+              NeXo es una herramienta desarrollada por <strong className="text-white/60">La Vida es Maravillosa</strong> para uso exclusivo del <strong className="text-white/60">SOM Festival</strong>.
             </p>
           </footer>
         </div>
