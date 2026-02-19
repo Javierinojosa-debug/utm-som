@@ -386,7 +386,7 @@ const [usuario, setUsuario] = useState<typeof usuarios[number]>('La Vida es Mara
             className="w-40 md:w-56 h-20 md:h-28 object-contain"
           />
           <img
-            src="/images/logosom.png"
+            src="/images/logosom.jpg"
             alt="SOM"
             className="w-40 md:w-56 h-20 md:h-28 object-contain"
           />
